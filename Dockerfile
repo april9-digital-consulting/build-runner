@@ -8,3 +8,13 @@ RUN apt-get update && apt-get -y --no-install-recommends install unzip apt-trans
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install
+RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
+    sysctl -p
+
+# Increase file read limits by appending to conf files
+RUN echo "root soft     nproc          65535" >> /etc/security/limits.conf
+RUN echo "root hard     nproc          65535" >> /etc/security/limits.conf
+RUN echo "root soft     nofile         65535" >> /etc/security/limits.conf
+RUN echo "root hard     nofile         65535" >> /etc/security/limits.conf
+
+RUN echo "session required pam_limits.so" >> sudo vim /etc/pam.d/common-session
