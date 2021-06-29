@@ -17,4 +17,4 @@ RUN echo "root hard     nproc          65535" >> /etc/security/limits.conf
 RUN echo "root soft     nofile         65535" >> /etc/security/limits.conf
 RUN echo "root hard     nofile         65535" >> /etc/security/limits.conf
 
-RUN echo "session required pam_limits.so" >> sudo vim /etc/pam.d/common-session
+RUN echo "session required pam_limits.so" >> /etc/pam.d/common-session
