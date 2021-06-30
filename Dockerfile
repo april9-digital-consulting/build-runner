@@ -9,7 +9,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && unzip awscliv2.zip \
     && ./aws/install
 RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
-    sysctl -p
+    && sysctl -p
 
 # Increase file read limits by appending to conf files
 RUN echo "root soft     nproc          65535" >> /etc/security/limits.conf
