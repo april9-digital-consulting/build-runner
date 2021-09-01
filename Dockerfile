@@ -8,6 +8,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install unzip apt-trans
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
 RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
     && sysctl -p
 
