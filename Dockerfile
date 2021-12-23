@@ -1,10 +1,13 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1.302-bionic
-RUN apt-get update && apt-get -y --no-install-recommends install unzip apt-transport-https ca-certificates curl software-properties-common \
+RUN apt-get update && apt-get -y --no-install-recommends install unzip apt-transport-https ca-certificates curl software-properties-common jq \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" \
+    && add-apt-repository ppa:git-core/ppa \
     && apt-get update \
-    && apt-get install --no-install-recommends docker-ce-cli \
+    && apt-get install --no-install-recommends docker-ce-cli git -y \
     && rm -rf /var/lib/apt/lists/*
+    && git --version
+    
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install
