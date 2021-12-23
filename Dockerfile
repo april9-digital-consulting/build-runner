@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install unzip apt-trans
     && add-apt-repository ppa:git-core/ppa \
     && apt-get update \
     && apt-get install --no-install-recommends docker-ce-cli git -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
     && git --version
     
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
