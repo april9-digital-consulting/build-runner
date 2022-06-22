@@ -21,9 +21,6 @@ RUN source $NVM_DIR/nvm.sh \
    && nvm use default
 ENV NODE_PATH $NVM_INSTALL_PATH/lib/node_modules
 ENV PATH $NVM_INSTALL_PATH/bin:$PATH
-RUN npm -v  # <= works
-RUN node -v  # <= works
-RUN nvm -v  # <= NOT works :( 
 
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
