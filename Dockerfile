@@ -16,10 +16,18 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
     && sysctl -p
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
-&& nvm install 16.15.1 \
-&& nvm alias default 16.15.1 \
-&& nvm use default
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 16
+
+# Install nvm with node and npm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 # Increase file read limits by appending to conf files
 RUN echo "root soft     nproc          65535" >> /etc/security/limits.conf
