@@ -17,7 +17,6 @@ RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
     && sysctl -p
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
-&& . /usr/local/nvm/nvm.sh \
 && nvm install 16.15.1 \
 && nvm alias default 16.15.1 \
 && nvm use default
