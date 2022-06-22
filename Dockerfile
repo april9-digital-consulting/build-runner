@@ -16,6 +16,12 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN echo "fs.file-max = 65535" >> /etc/sysctl.conf \
     && sysctl -p
 
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+&& . /usr/local/nvm/nvm.sh \
+&& nvm install 16.15.1 \
+&& nvm alias default 16.15.1 \
+&& nvm use default
+
 # Increase file read limits by appending to conf files
 RUN echo "root soft     nproc          65535" >> /etc/security/limits.conf
 RUN echo "root hard     nproc          65535" >> /etc/security/limits.conf
